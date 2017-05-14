@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">Click</button>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.4.0/dist/global/Rx.js"></script>
+    <script>
+        let button = document.querySelector('.btn');
+
+        let observer = {
+            next: (val) => console.log(val)
+        }
+
+       let observable = Rx.Observable.interval(1000)
+            .map( (val) => `Number ${val}` )
+            .throttleTime(2000)
+            .subscribe(observer);
+
+        setTimeout( () => observable.unsubscribe(), 5000);
+
+    </script>
+</body>
+</html>

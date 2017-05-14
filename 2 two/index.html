@@ -23,10 +23,12 @@
         //         // .subscribe((val) => console.log(val));
         //         .subscribe(observer);
 
-        Rx.Observable.create((obs) => {
+        let subscription = Rx.Observable.create((obs) => {
             // obs.next('A value');
             button.addEventListener('click', (val) => obs.next(val) );
         }).subscribe(observer);
+
+        setTimeout( () => subscription.unsubscribe(), 5000);
     </script>
 </body>
 </html>
