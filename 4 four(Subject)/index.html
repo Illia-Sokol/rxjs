@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">Click</button>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.4.0/dist/global/Rx.js"></script>
+    <script>
+        let subject = new Rx.Subject();
+
+        subject.subscribe({
+            next: (val) => console.log(val),
+            error: (error) => console.log(error),
+            complete: () => console.log('Finished subscribe')
+        });
+        subject.subscribe({
+            next: (val) => console.log(val)
+        })
+
+        subject.next('A new data');
+
+    </script>
+</body>
+</html>
