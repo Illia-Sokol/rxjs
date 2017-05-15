@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">Click</button>
+    <input type="text" class="text">
+    <script src="https://unpkg.com/@reactivex/rxjs@5.4.0/dist/global/Rx.js"></script>
+    <script>
+
+        let observable = Rx.Observable.of(1, 2, 3, 4, 5);
+
+        observable
+        // .reduce( (sum, currentNumber) => {
+        //     return sum + currentNumber;
+        // }, 0)
+        .scan( (sum, currentNumber) => {
+            return sum + currentNumber;
+        }, 0)
+        .subscribe(
+            (value) => console.log(value)
+        )
+
+    </script>
+</body>
+</html>
