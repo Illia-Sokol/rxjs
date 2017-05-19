@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="text">
+    <script src="https://unpkg.com/@reactivex/rxjs@5.4.0/dist/global/Rx.js"></script>
+    <script>
+        let input = document.querySelector('#text');
+        let obserbable = Rx.Observable.fromEvent(input, 'input');
+
+        obserbable
+            // .map( (event) => event.target.value)
+            .pluck('target', 'value')
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe({
+                next: (val) => console.log(val)         
+            })
+    </script>
+</body>
+</html>
