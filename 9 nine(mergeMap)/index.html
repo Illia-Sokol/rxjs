@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2> Rxjs</h2>
+    <input type="text" class="input1">
+    <input type="text" class="input2">
+    <h3>Combine input only after first input had typed</h3><span></span>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.4.0/dist/global/Rx.js"></script>
+    <script>
+        let text1 = document.querySelector('.input1');
+        let text2 = document.querySelector('.input2');
+        let span = document.querySelector('span');
+
+        let obs1 = Rx.Observable.fromEvent(text1, 'input');
+        let obs2 = Rx.Observable.fromEvent(text2, 'input');
+
+        function returnValue(e) {
+            return e.target.value;
+        }
+        
+        obs1.mergeMap(
+            evt1 => {
+              return obs2.map( evt2 => `${returnValue(evt1)} ${returnValue(evt2)}`)
+            }
+        ).subscribe(
+            result => span.textContent = result
+        )
+
+        // obs1.subscribe( evt1 => console.log(evt1.target.value) );
+    </script>
+</body>
+</html>
