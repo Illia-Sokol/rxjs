@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">Click</button>
+    <div></div>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.4.0/dist/global/Rx.js"></script>
+    <script>
+        let button = document.querySelector('.btn');
+        let div = document.querySelector('div');
+
+        let subject = new Rx.BehaviorSubject('Default Click');
+
+        button.addEventListener('click', evt => subject.next('Clicked!'));
+
+        subject.subscribe( evt => div.textContent = evt);
+
+    </script>
+</body>
+</html>
